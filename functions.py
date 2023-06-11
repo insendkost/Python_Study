@@ -1,6 +1,10 @@
 import tkinter as tk
-from tkcalendar import Calendar
 import openpyxl
+import extended_application
+
+from tkcalendar import Calendar
+from tkinter import filedialog
+
 
 def open_calendar(app):
     if app.calendar_window is None or not app.calendar_window.winfo_exists():
@@ -17,8 +21,10 @@ def switch_mode(self):
         self.style.theme_use("forest-dark")
         
 def load_data(self):
-    path = "C:/Users/insen/OneDrive/Desktop/Coding/Python/Projects/Excel_App/Employee_List.xlsx"
-    workbook = openpyxl.load_workbook(path)
+    #path = "/Users/evgenykost/Desktop/Coding/PythonProjects/GUI_Projects/Excel_App/Python_Study/Python_Study/Employee_List.xlsx"
+    #ALTERNATIVE PATH
+    file_path = filedialog.askopenfilename(filetypes=[("Excel Files", "*.xlsx")])
+    workbook = openpyxl.load_workbook(file_path)
     sheet = workbook.active  # Choose the active sheet from the Excel File
 
     list_values = list(sheet.values)
@@ -31,4 +37,28 @@ def load_data(self):
     for value in list_values[1:]:
         self.treeview.insert("", "end", values=value)
     
+    workbook.close()
     
+def create_new_file(table_cols):
+    #Creating a new Excel Files with specific column headers
+    workbook = openpyxl.Workbook()
+    sheet = workbook.active #Choose the active sheet from the Excel File
+    sheet.title = "New Employee List"
+    sheet.append(table_cols)
+    
+    #Open a file dialog to save the file
+    root = tk.Tk()
+    root.withdraw() #Hides the root window
+    
+    file_path = filedialog.asksaveasfilename(filetypes=[("Excel Files", "*.xlsx")])
+    
+    if file_path:
+        # Save the file
+        workbook.save(file_path)
+        workbook.close()
+        
+        print(f"File saved to {file_path}")
+
+def open_extended_window(self):
+    extended_window = tk.Toplevel(self.root)
+    extended_app = ExtendedApplication(extended_window)
