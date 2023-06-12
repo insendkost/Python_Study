@@ -1,8 +1,17 @@
+<<<<<<< HEAD
 
 from common import tk,openpyxl,filedialog,Calendar,ttk
 
 
 
+=======
+import tkinter as tk
+import openpyxl
+import extended_application
+
+from tkcalendar import Calendar
+from tkinter import filedialog
+>>>>>>> fe4573b6fde9d32d55748c1b298dd8d691690983
 
 
 def open_calendar(app):
@@ -20,6 +29,7 @@ def switch_mode(self):
         self.style.theme_use("forest-dark")
         
 def load_data(self):
+<<<<<<< HEAD
     
     #TODO: Add an error handling for the file path if cancelled
     
@@ -27,6 +37,10 @@ def load_data(self):
     #path = "/Users/evgenykost/Desktop/Coding/PythonProjects/GUI_Projects/Excel_App/Python_Study/Python_Study/Employee_List.xlsx"
     #ALTERNATIVE PATH
     
+=======
+    #path = "/Users/evgenykost/Desktop/Coding/PythonProjects/GUI_Projects/Excel_App/Python_Study/Python_Study/Employee_List.xlsx"
+    #ALTERNATIVE PATH
+>>>>>>> fe4573b6fde9d32d55748c1b298dd8d691690983
     file_path = filedialog.askopenfilename(filetypes=[("Excel Files", "*.xlsx")])
     workbook = openpyxl.load_workbook(file_path)
     sheet = workbook.active  # Choose the active sheet from the Excel File
@@ -63,6 +77,7 @@ def create_new_file(table_cols):
         
         print(f"File saved to {file_path}")
 
+<<<<<<< HEAD
 
 def delete_row(self):
     print("Delete Row was called")
@@ -104,3 +119,8 @@ def check_excel_files(app):
     
 def save_by_exit():
     print("Save")
+=======
+def open_extended_window(self):
+    extended_window = tk.Toplevel(self.root)
+    extended_app = ExtendedApplication(extended_window)
+>>>>>>> fe4573b6fde9d32d55748c1b298dd8d691690983
